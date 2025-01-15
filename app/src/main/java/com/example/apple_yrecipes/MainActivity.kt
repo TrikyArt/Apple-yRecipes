@@ -93,7 +93,7 @@ class MainActivity : ComponentActivity() {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Spacer(
-                                modifier = Modifier.height(100.dp)
+                                modifier = Modifier.height(70.dp)
                             )
 
                             Box(
@@ -105,42 +105,61 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier
                                         .shadow(
                                             elevation = 8.dp,
-                                            shape = RoundedCornerShape(16.dp),
+                                            shape = RoundedCornerShape(4.dp),
                                             clip = false
                                         )
                                         .background(
                                             color = colorResource(id = R.color.beige),
-                                            shape = RoundedCornerShape(16.dp)
+                                            shape = RoundedCornerShape(4.dp)
                                         )
-                                        .padding(16.dp),
+                                        .padding(
+                                            top = 20.dp,
+                                            start = 12.dp,
+                                            end = 12.dp,
+                                            bottom = 23.dp
+                                        ),
                                 ) {
                                     Text(
                                         text = "Apple-y Recipes",
                                         fontWeight = FontWeight.Medium,
-                                        fontSize = 30.sp,
+                                        fontSize = 26.sp,
                                         color = colorResource(id = R.color.red)
                                     )
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(50.dp))
+                            Spacer(modifier = Modifier.height(45.dp))
 
-                            Button(onClick = {
+                            Button(
+                                onClick = {
                             val navigate = Intent(this@MainActivity, AddActivity::class.java)
                             startActivity(navigate)
                         },
                             colors = ButtonDefaults.buttonColors(
                                 colorResource(id = R.color.red)
                             ),
-                                modifier = Modifier.shadow(
-                                    elevation = 8.dp,
-                                    shape = RoundedCornerShape(16.dp),
-                                    clip = false
-                                )
+                                modifier = Modifier
+                                    .shadow(
+                                        elevation = 4.dp,
+                                        shape = RoundedCornerShape(15.dp),
+                                        clip = false
+                                    ),
+
+                                shape = RoundedCornerShape(15.dp)
 
                             ) {
-                            Text(text = "Add Recipe")
+                            Text( modifier = Modifier
+                                .height(50.dp)
+                                .padding(
+                                    top = 11.dp
+                                ),
+                                text = "Add Recipe",
+                                fontSize = 20.sp,
+                                color = colorResource(id = R.color.white),
+                            )
                         } }
+
+                        Spacer(modifier = Modifier.height(35.dp))
 
                         LazyColumn {
                              items(recipeList){ recipe ->
@@ -149,9 +168,42 @@ class MainActivity : ComponentActivity() {
                                      navigate.putExtra("RecipeId", recipe.RecipeId)
                                      startActivity(navigate)
                                  }) {
-                                     Divider(Modifier.fillParentMaxWidth().padding(6.dp))
-                                     Spacer(modifier = Modifier.height(6.dp))
-                                     Text(text = "${recipe.RecipeName}")
+                                     Box(
+                                         modifier = Modifier
+                                             .padding(10.dp)
+                                             .fillMaxWidth()
+                                     ) {
+                                         Box(
+                                             Modifier
+                                                 .fillMaxWidth()
+                                                 .height(3.dp)
+                                                 .background(
+                                                     color = colorResource(id = R.color.red),
+                                                     shape = RoundedCornerShape(5.dp)
+                                                 )
+                                         )
+                                         Box(
+                                             modifier = Modifier
+                                                 .fillMaxSize()
+                                                 .padding(3.dp)
+                                                 .background(
+                                                     color = colorResource(id = R.color.beige),
+                                                     shape = RoundedCornerShape(3.dp),
+                                                 )
+                                                 .height(60.dp)
+                                         ) { Text(
+                                             text = "${recipe.RecipeName}",
+                                             fontSize = 20.sp,
+                                             color = colorResource(id = R.color.red),
+                                             modifier = Modifier
+                                                 .padding(
+                                                     top = 10.dp,
+                                                     start = 10.dp
+                                                 )
+
+                                         ) }
+                                     }
+
                                  }
 
                              }

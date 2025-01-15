@@ -116,7 +116,9 @@ class MainActivity : ComponentActivity() {
                             )
 
                             Box(
-                                
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.Center
+
                             ) {
                                 Box(
                                     modifier = Modifier
@@ -129,7 +131,7 @@ class MainActivity : ComponentActivity() {
                                             color = colorResource(id = R.color.beige),
                                             shape = RoundedCornerShape(16.dp)
                                         )
-                                        .padding(16.dp)
+                                        .padding(16.dp),
                                 ) {
                                     Text(
                                         text = "Apple-y Recipes",
@@ -139,6 +141,8 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                             }
+
+                            Spacer(modifier = Modifier.height(50.dp))
 
                             Button(onClick = {
                             val navigate = Intent(this@MainActivity, AddActivity::class.java)

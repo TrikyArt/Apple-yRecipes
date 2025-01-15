@@ -11,7 +11,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -85,7 +87,12 @@ class MainActivity : ComponentActivity() {
                     viewModel.getRecipes().observe(this){
                         recipeList = it
                     }
-                    Image(painter = painterResource(id = R.drawable.bg), contentDescription = null)
+                    Image(
+                        painter = painterResource(id = R.drawable.bg),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
                         Button(onClick = {

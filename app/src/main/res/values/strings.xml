@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Apple-yRecipes</string>
+    <string name="title_activity_add">AddActivity</string>
+    <string name="title_activity_recipe">RecipeActivity</string>
+</resources>

@@ -11,9 +11,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -23,7 +25,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -39,8 +44,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -104,42 +112,125 @@ class RecipeActivity : ComponentActivity() {
                     )
 
                     Column(
-                        Modifier.padding(12.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        Modifier.padding(
+                            top = 80.dp,
+                        ),
                     ) {
 
-                        Button(onClick = {
+                        Button(
+                            modifier = Modifier.padding(start = 30.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                colorResource(id = R.color.red)
+                            ),
+                            shape = RoundedCornerShape(8.dp),
+                            onClick = {
                             val navigate = Intent(this@RecipeActivity, MainActivity::class.java)
                             startActivity(navigate)
                         }) {
                             Text(text = "Go back")
                         }
                         if (oneRecipe != null) {
-                            Column {
-                                Spacer(modifier = Modifier.height(6.dp))
-                                Text(text = "${oneRecipe!!.RecipeName}")
-                                Spacer(modifier = Modifier.height(6.dp))
-                                Text(text = "${oneRecipe!!.Ingredient}")
-                                Spacer(modifier = Modifier.height(6.dp))
-                                Text(text = "${oneRecipe!!.Description}")
+
+                            RecipeImage()
+
+                            Box(
+                                modifier = Modifier
+                                    .padding(
+                                        top = 30.dp,
+                                        start = 10.dp,
+                                        end = 10.dp,
+                                        bottom = 30.dp
+                                    )
+                            ) {
+                                Box(
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(3.dp)
+                                        .background(
+                                            color = colorResource(id = R.color.red),
+                                            shape = RoundedCornerShape(5.dp)
+                                        )
+                                )
+                                Box(
+                                    modifier = Modifier.padding(3.dp)
+                                ) {
+                                    Column(
+                                        modifier = Modifier
+                                            .background(
+                                                color = colorResource(id = R.color.beige),
+                                                shape = RoundedCornerShape(5.dp)
+                                            )
+                                            .padding(20.dp)
+                                            .fillMaxWidth()
+                                    ) {
+                                        Spacer(modifier = Modifier.height(6.dp))
+
+                                        Text(
+                                            text = "${oneRecipe!!.RecipeName}",
+                                            fontWeight = FontWeight.Medium,
+                                            fontSize = 26.sp,
+                                            color = colorResource(id = R.color.red)
+                                        )
+
+                                        Box() {  }
+
+                                        Spacer(modifier = Modifier.height(6.dp))
+
+                                        Text(text = "${oneRecipe!!.Ingredient}")
+
+                                        Box() {  }
+
+                                        Spacer(modifier = Modifier.height(6.dp))
+
+                                        Text(text = "${oneRecipe!!.Description}")
+                                    }
+                                }
+
                             }
+
                         }
-                        Row(modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min)){
-                            Button(onClick = {}) {
-                                Text(text = "Edit")
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(IntrinsicSize.Min)
+                        ){
+                            Button(
+                                modifier = Modifier.padding(start = 100.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    colorResource(id = R.color.red)
+                                ),
+                                shape = RoundedCornerShape(8.dp),
+                                onClick = {}) {
+                                Text(
+                                    modifier = Modifier
+                                        .padding(start = 10.dp, end = 10.dp),
+                                    text = "Edit"
+                                )
                             }
 
                             Button(
+                                modifier = Modifier.padding(start = 20.dp),
+                                shape = RoundedCornerShape(8.dp),
+                               colors = ButtonDefaults.buttonColors(
+                                   colorResource(id = R.color.red)
+                               ),
                                 onClick = {
                                     val navigate = Intent(this@RecipeActivity,MainActivity::class.java)
                                     viewModel.deleteRecipe(recipeItem)
                                     startActivity(navigate)
                                 }
                             ) {
-                                Text(text = "Delete")
+                                Text(
+                                    modifier = Modifier
+                                        .padding(start = 7.dp, end = 7.dp),
+                                    text = "Delete"
+                                )
                             }
                         }
-                        RecipeImage()
+                        Spacer(modifier = Modifier.height(15.dp))
+
+
+
                     }
                 }
             }
@@ -158,8 +249,12 @@ fun RecipeImage(){
     )
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .padding(
+                top = 20.dp,
+                start = 80.dp,
+
+            )
         ) {
         Image(painter = painter,
             contentDescription = null,
@@ -169,7 +264,7 @@ fun RecipeImage(){
                 .size(250.dp)
                 .border(
                     width = 1.dp,
-                    color = Color.Blue,
+                    color = colorResource(id = R.color.red),
                     shape = RectangleShape
                     )
         )

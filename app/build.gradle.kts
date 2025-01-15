@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
    // alias(libs.plugins.kotlin.compose)
     kotlin("kapt")
+    id("androidx.room")
     alias(libs.plugins.kotlin.compose)
 }
 
@@ -38,6 +39,9 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
 }
 

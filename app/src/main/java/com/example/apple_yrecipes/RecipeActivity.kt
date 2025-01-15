@@ -148,11 +148,6 @@ fun RecipeImage(){
     val painter = rememberAsyncImagePainter(
         imageUri.value.ifEmpty { R.drawable.ic_launcher_foreground }
     )
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
-    ) { uri: Uri? ->
-        uri?.let { imageUri.value = it.toString() }
-    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -169,7 +164,6 @@ fun RecipeImage(){
                     color = Color.Blue,
                     shape = RectangleShape
                     )
-                .clickable { launcher.launch("image/*") }
         )
     }
 }

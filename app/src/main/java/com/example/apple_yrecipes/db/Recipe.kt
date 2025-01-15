@@ -9,5 +9,6 @@ data class Recipe(
     val Ingredient: String,
     val Description: String,
     @PrimaryKey(autoGenerate = true)
-    val RecipeId : Int = 0
+    val RecipeId : Int = 0,
+    val ImagePath: String,
 )

@@ -18,23 +18,20 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.apple_yrecipes.ViewModel.RecipeViewModel
 import com.example.apple_yrecipes.ViewModel.Repository
-import com.example.apple_yrecipes.db.Database
+import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.db.Recipe
 import com.example.apple_yrecipes.ui.theme.AppleyRecipesTheme
 
@@ -42,7 +39,7 @@ class MainActivity : ComponentActivity() {
     private val db by lazy {
         Room.databaseBuilder(
             applicationContext,
-            Database::class.java,
+            AppDatabase::class.java,
             name = "recipe.db"
         ).fallbackToDestructiveMigration().build()
     }
@@ -63,20 +60,6 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background){
 
-                    var RecipeName by remember {
-                        mutableStateOf("")
-                    }
-                    var Ingrediente by remember {
-                        mutableStateOf("")
-                    }
-                    var Description by remember {
-                        mutableStateOf("")
-                    }
-                    val recipe = Recipe(
-                        RecipeName,
-                        Ingrediente,
-                        Description
-                    )
                     var recipeList by remember {
                         mutableStateOf(listOf<Recipe>())
                     }

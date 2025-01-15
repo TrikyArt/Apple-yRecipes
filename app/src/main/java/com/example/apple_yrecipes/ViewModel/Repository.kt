@@ -1,10 +1,10 @@
 package com.example.apple_yrecipes.ViewModel
 
-import com.example.apple_yrecipes.db.Database
+import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.db.Recipe
 
 
-class Repository(private val db : Database) {
+class Repository(private val db : AppDatabase) {
 
     suspend fun upsertRecipe(recipe: Recipe){
         db.recipeDao().upsertRecipe(recipe)

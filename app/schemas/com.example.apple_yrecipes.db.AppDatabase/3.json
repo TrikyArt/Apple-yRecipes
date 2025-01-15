@@ -1,0 +1,58 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "d1d6a96932e54071a6f6e2dcea55bd75",
+    "entities": [
+      {
+        "tableName": "Recipe",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`RecipeName` TEXT NOT NULL, `Ingredient` TEXT NOT NULL, `Description` TEXT NOT NULL, `RecipeId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ImagePath` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "RecipeName",
+            "columnName": "RecipeName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Ingredient",
+            "columnName": "Ingredient",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Description",
+            "columnName": "Description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "RecipeId",
+            "columnName": "RecipeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ImagePath",
+            "columnName": "ImagePath",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "RecipeId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd1d6a96932e54071a6f6e2dcea55bd75')"
+    ]
+  }
+}

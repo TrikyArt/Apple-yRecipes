@@ -14,7 +14,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -48,7 +47,7 @@ import androidx.room.Room
 import coil3.compose.rememberAsyncImagePainter
 import com.example.apple_yrecipes.ViewModel.CheckRecipeViewModel
 import com.example.apple_yrecipes.ViewModel.Repository
-import com.example.apple_yrecipes.db.Database
+import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.db.Recipe
 import com.example.apple_yrecipes.ui.theme.AppleyRecipesTheme
 
@@ -56,7 +55,7 @@ class RecipeActivity : ComponentActivity() {
     private val db by lazy {
         Room.databaseBuilder(
             applicationContext,
-            Database::class.java,
+            AppDatabase::class.java,
             name = "recipe.db"
         ).build()
     }
@@ -89,20 +88,6 @@ class RecipeActivity : ComponentActivity() {
 
                     })
 
-                    var RecipeName by remember {
-                        mutableStateOf("")
-                    }
-                    var Ingrediente by remember {
-                        mutableStateOf("")
-                    }
-                    var Description by remember {
-                        mutableStateOf("")
-                    }
-                    val recipe = Recipe(
-                        RecipeName,
-                        Ingrediente,
-                        Description
-                    )
                     var oneRecipe by remember {
                         mutableStateOf<Recipe?>(null)
                     }

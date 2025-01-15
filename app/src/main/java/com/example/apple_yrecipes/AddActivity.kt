@@ -88,6 +88,13 @@ class AddActivity : ComponentActivity() {
                     )
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
+                        Button(onClick = {
+                            val navigate = Intent(this@AddActivity, MainActivity::class.java)
+                            startActivity(navigate)
+                        }) {
+                            Text(text = "Go back")
+                        }
+
                         TextField(value = RecipeName,
                             onValueChange = {RecipeName = it},
                             placeholder = { Text(text = "Recipe name") })

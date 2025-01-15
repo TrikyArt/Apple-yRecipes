@@ -1,31 +1,49 @@
 package com.example.apple_yrecipes
 
 import android.content.Intent
+import android.net.http.HeaderBlock
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -66,14 +84,62 @@ class MainActivity : ComponentActivity() {
                     viewModel.getRecipes().observe(this){
                         recipeList = it
                     }
+                    Image(
+                        painter = painterResource(id = R.drawable.bg),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
-                        Button(onClick = {
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Spacer(
+                                modifier = Modifier.height(100.dp)
+                            )
+
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.Center
+
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .shadow(
+                                            elevation = 8.dp,
+                                            shape = RoundedCornerShape(16.dp),
+                                            clip = false
+                                        )
+                                        .background(
+                                            color = colorResource(id = R.color.beige),
+                                            shape = RoundedCornerShape(16.dp)
+                                        )
+                                        .padding(16.dp),
+                                ) {
+                                    Text(
+                                        text = "Apple-y Recipes",
+                                        fontWeight = FontWeight.Medium,
+                                        fontSize = 30.sp,
+                                        color = colorResource(id = R.color.red)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(50.dp))
+
+                            Button(onClick = {
                             val navigate = Intent(this@MainActivity, AddActivity::class.java)
                             startActivity(navigate)
-                        }) {
+                        },
+                            colors = ButtonDefaults.buttonColors(
+                                colorResource(id = R.color.red)
+                            )
+
+                        ) {
                             Text(text = "Add Recipe")
-                        }
+                        } }
 
                         LazyColumn {
                              items(recipeList){ recipe ->

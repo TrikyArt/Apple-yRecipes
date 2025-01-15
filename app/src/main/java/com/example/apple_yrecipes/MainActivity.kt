@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -83,6 +85,7 @@ class MainActivity : ComponentActivity() {
                     viewModel.getRecipes().observe(this){
                         recipeList = it
                     }
+                    Image(painter = painterResource(id = R.drawable.bg), contentDescription = null)
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
                         Button(onClick = {

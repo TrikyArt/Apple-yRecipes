@@ -59,6 +59,7 @@ import com.example.apple_yrecipes.ViewModel.Repository
 import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.db.Recipe
 import com.example.apple_yrecipes.ui.theme.AppleyRecipesTheme
+import com.example.apple_yrecipes.ui.theme.Itim
 
 class RecipeActivity : ComponentActivity() {
     private val db by lazy {
@@ -127,7 +128,11 @@ class RecipeActivity : ComponentActivity() {
                             val navigate = Intent(this@RecipeActivity, MainActivity::class.java)
                             startActivity(navigate)
                         }) {
-                            Text(text = "Go back")
+                            Text(
+                                fontFamily = Itim,
+                                fontSize = 20.sp,
+                                text = "go back"
+                            )
                         }
                         if (oneRecipe != null) {
 
@@ -166,23 +171,72 @@ class RecipeActivity : ComponentActivity() {
                                         Spacer(modifier = Modifier.height(6.dp))
 
                                         Text(
+                                            modifier = Modifier
+                                                .padding(
+                                                    bottom = 8.dp
+                                                ),
                                             text = "${oneRecipe!!.RecipeName}",
-                                            fontWeight = FontWeight.Medium,
-                                            fontSize = 26.sp,
+                                            fontFamily = Itim,
+                                            fontSize = 30.sp,
                                             color = colorResource(id = R.color.red)
                                         )
 
-                                        Box() {  }
+                                        Spacer(modifier = Modifier.height(6.dp))
+
+                                        Box(
+                                            Modifier
+                                                .fillMaxWidth()
+                                                .height(3.dp)
+                                                .background(
+                                                    color = colorResource(id = R.color.red),
+                                                    shape = RoundedCornerShape(5.dp)
+                                                )
+                                        ) {  }
+
+                                        Text(
+                                            modifier = Modifier
+                                                .padding(10.dp),
+                                            text = "${oneRecipe!!.Ingredient}",
+                                            fontFamily = Itim,
+                                            fontSize = 20.sp,
+                                            color = colorResource(id = R.color.darkRed)
+                                        )
+
+                                        Box(
+                                            Modifier
+                                                .fillMaxWidth()
+                                                .height(3.dp)
+                                                .background(
+                                                    color = colorResource(id = R.color.red),
+                                                    shape = RoundedCornerShape(5.dp)
+                                                )
+                                        ) {  }
 
                                         Spacer(modifier = Modifier.height(6.dp))
 
-                                        Text(text = "${oneRecipe!!.Ingredient}")
+                                        Text(
+                                            modifier = Modifier
+                                            .padding(
+                                                top = 10.dp,
+                                                start = 8.dp
+                                            ),
+                                            text = "Recipe Description: ",
+                                            fontFamily = Itim,
+                                            color = colorResource(id = R.color.red),
+                                            fontSize = 23.sp,
+                                            fontWeight = FontWeight.Medium
+                                        )
 
-                                        Box() {  }
+                                        Text(
+                                            modifier = Modifier
+                                                .padding(8.dp),
+                                            text = "${oneRecipe!!.Description}",
+                                            color = colorResource(id = R.color.darkRed),
+                                            fontSize = 20.sp,
+                                            fontFamily = Itim
+                                        )
 
                                         Spacer(modifier = Modifier.height(6.dp))
-
-                                        Text(text = "${oneRecipe!!.Description}")
                                     }
                                 }
 
@@ -204,7 +258,9 @@ class RecipeActivity : ComponentActivity() {
                                 Text(
                                     modifier = Modifier
                                         .padding(start = 10.dp, end = 10.dp),
-                                    text = "Edit"
+                                    fontSize = 20.sp,
+                                    text = "Edit",
+                                    fontFamily = Itim,
                                 )
                             }
 
@@ -223,7 +279,9 @@ class RecipeActivity : ComponentActivity() {
                                 Text(
                                     modifier = Modifier
                                         .padding(start = 7.dp, end = 7.dp),
-                                    text = "Delete"
+                                    fontSize = 20.sp,
+                                    text = "Delete",
+                                    fontFamily = Itim,
                                 )
                             }
                         }

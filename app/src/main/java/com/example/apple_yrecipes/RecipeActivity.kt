@@ -136,7 +136,25 @@ class RecipeActivity : ComponentActivity() {
                         }
                         if (oneRecipe != null) {
 
-                            RecipeImage()
+                            val painter = if (oneRecipe!!.ImagePath.isEmpty()){
+                                painterResource(R.drawable.ic_launcher_foreground)
+                            } else {
+                                rememberAsyncImagePainter(oneRecipe!!.ImagePath)
+                            }
+                            Log.i("image", oneRecipe.toString())
+                            Image(
+                                painter = painter,
+                                contentDescription = "Image Path",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .clip(RectangleShape)
+                                    .size(250.dp)
+                                    .border(
+                                        width = 1.dp,
+                                        color = colorResource(id = R.color.red),
+                                        shape = RectangleShape
+                                    )
+                            )
 
                             Box(
                                 modifier = Modifier
@@ -315,16 +333,7 @@ fun RecipeImage(){
             )
         ) {
         Image(painter = painter,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .clip(RectangleShape)
-                .size(250.dp)
-                .border(
-                    width = 1.dp,
-                    color = colorResource(id = R.color.red),
-                    shape = RectangleShape
-                    )
+            contentDescription = null
         )
     }
 }

@@ -112,13 +112,13 @@ class AddActivity : ComponentActivity() {
                     Column(
                         Modifier
                             .padding(
-                                top = 50.dp,
+                                top = 80.dp,
                                 start = 20.dp
                             ),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
 
-                        AddRecipeImage(ImagePath)
+
 
                         Button(onClick = {
                             val navigate = Intent(this@AddActivity, MainActivity::class.java)
@@ -128,7 +128,9 @@ class AddActivity : ComponentActivity() {
                         }
 
 
+                        AddRecipeImage(ImagePath)
 
+                        Spacer(modifier = Modifier.height(10.dp))
 
                         TextField(value = RecipeName,
                             onValueChange = {RecipeName = it},
@@ -204,8 +206,12 @@ fun AddRecipeImage(imagePath:MutableState<String>){
     }
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .padding(
+                top = 10.dp,
+                start = 50.dp,
+
+                )
     ) {
         Image(painter =  painter,
             contentDescription = null,

@@ -160,10 +160,11 @@ class AddActivity : ComponentActivity() {
                         Box(
                             Modifier
                                 .fillMaxWidth()
+                                .padding(start = 28.dp)
                         ) {
                             Box(
                                 Modifier
-                                    .width(280.dp)
+                                    .width(284.dp)
                                     .height(3.dp)
                                     .background(
                                         color = colorResource(id = R.color.red),
@@ -174,7 +175,8 @@ class AddActivity : ComponentActivity() {
                             TextField(
                                 modifier = Modifier
                                     .padding(
-                                        top = 3.dp
+                                        top = 3.dp,
+                                        start = 2.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
                                 value = RecipeName,
@@ -197,10 +199,11 @@ class AddActivity : ComponentActivity() {
                         Box(
                             Modifier
                                 .fillMaxWidth()
+                                .padding(start = 28.dp)
                         ) {
                             Box(
                                 Modifier
-                                    .width(280.dp)
+                                    .width(284.dp)
                                     .height(3.dp)
                                     .background(
                                         color = colorResource(id = R.color.red),
@@ -210,7 +213,8 @@ class AddActivity : ComponentActivity() {
                             TextField(
                                 modifier = Modifier
                                     .padding(
-                                        top = 3.dp
+                                        top = 3.dp,
+                                        start = 2.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
                                 value = Ingredient,
@@ -233,10 +237,11 @@ class AddActivity : ComponentActivity() {
                         Box(
                             Modifier
                                 .fillMaxWidth()
+                                .padding(start = 28.dp)
                         ) {
                             Box(
                                 Modifier
-                                    .width(280.dp)
+                                    .width(284.dp)
                                     .height(3.dp)
                                     .background(
                                         color = colorResource(id = R.color.red),
@@ -247,7 +252,8 @@ class AddActivity : ComponentActivity() {
                             TextField(
                                 modifier = Modifier
                                     .padding(
-                                        top = 3.dp
+                                        top = 3.dp,
+                                        start = 2.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
                                 value = Description,

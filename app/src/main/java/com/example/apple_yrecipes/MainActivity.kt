@@ -48,6 +48,8 @@ import com.example.apple_yrecipes.ViewModel.Repository
 import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.db.Recipe
 import com.example.apple_yrecipes.ui.theme.AppleyRecipesTheme
+import com.example.apple_yrecipes.ui.theme.Itim
+import com.example.apple_yrecipes.ui.theme.Kaushan_Script
 
 class MainActivity : ComponentActivity() {
     private val db by lazy {
@@ -114,15 +116,16 @@ class MainActivity : ComponentActivity() {
                                         )
                                         .padding(
                                             top = 20.dp,
-                                            start = 12.dp,
-                                            end = 12.dp,
+                                            start = 14.dp,
+                                            end = 14.dp,
                                             bottom = 23.dp
                                         ),
                                 ) {
                                     Text(
                                         text = "Apple-y Recipes",
                                         fontWeight = FontWeight.Medium,
-                                        fontSize = 26.sp,
+                                        fontFamily = Kaushan_Script,
+                                        fontSize = 30.sp,
                                         color = colorResource(id = R.color.red)
                                     )
                                 }
@@ -149,12 +152,13 @@ class MainActivity : ComponentActivity() {
 
                             ) {
                             Text( modifier = Modifier
-                                .height(50.dp)
+                                .height(45.dp)
                                 .padding(
-                                    top = 11.dp
+                                    top = 8.dp,
                                 ),
                                 text = "Add Recipe",
-                                fontSize = 20.sp,
+                                fontFamily = Itim,
+                                fontSize = 22.sp,
                                 color = colorResource(id = R.color.white),
                             )
                         } }
@@ -193,7 +197,8 @@ class MainActivity : ComponentActivity() {
                                                  .height(60.dp)
                                          ) { Text(
                                              text = "${recipe.RecipeName}",
-                                             fontSize = 20.sp,
+                                             fontSize = 24.sp,
+                                             fontFamily = Itim,
                                              color = colorResource(id = R.color.red),
                                              modifier = Modifier
                                                  .padding(

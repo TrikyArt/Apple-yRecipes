@@ -115,11 +115,12 @@ class RecipeActivity : ComponentActivity() {
                     Column(
                         Modifier.padding(
                             top = 80.dp,
+                            start = 10.dp
                         ),
                     ) {
 
                         Button(
-                            modifier = Modifier.padding(start = 30.dp),
+                            modifier = Modifier.padding(start = 20.dp),
                             colors = ButtonDefaults.buttonColors(
                                 colorResource(id = R.color.red)
                             ),
@@ -142,6 +143,7 @@ class RecipeActivity : ComponentActivity() {
                                 rememberAsyncImagePainter(oneRecipe!!.ImagePath)
                             }
                             Log.i("image", oneRecipe.toString())
+
                             Image(
                                 painter = painter,
                                 contentDescription = "Image Path",
@@ -154,13 +156,13 @@ class RecipeActivity : ComponentActivity() {
                                         color = colorResource(id = R.color.red),
                                         shape = RectangleShape
                                     )
+
                             )
 
                             Box(
                                 modifier = Modifier
                                     .padding(
                                         top = 30.dp,
-                                        start = 10.dp,
                                         end = 10.dp,
                                         bottom = 30.dp
                                     )
@@ -177,6 +179,8 @@ class RecipeActivity : ComponentActivity() {
                                 Box(
                                     modifier = Modifier.padding(3.dp)
                                 ) {
+
+
                                     Column(
                                         modifier = Modifier
                                             .background(
@@ -267,7 +271,7 @@ class RecipeActivity : ComponentActivity() {
                                 .height(IntrinsicSize.Min)
                         ){
                             Button(
-                                modifier = Modifier.padding(start = 100.dp),
+                                modifier = Modifier.padding(start = 80.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     colorResource(id = R.color.red)
                                 ),
@@ -311,29 +315,5 @@ class RecipeActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun RecipeImage(){
-
-    val imageUri = rememberSaveable {
-        mutableStateOf("")
-    }
-    val painter = rememberAsyncImagePainter(
-        imageUri.value.ifEmpty { R.drawable.ic_launcher_foreground }
-    )
-
-    Column(
-        modifier = Modifier
-            .padding(
-                top = 20.dp,
-                start = 80.dp,
-
-            )
-        ) {
-        Image(painter = painter,
-            contentDescription = null
-        )
     }
 }

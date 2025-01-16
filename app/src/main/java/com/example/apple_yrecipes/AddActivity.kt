@@ -12,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,14 +20,21 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -41,8 +49,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -52,6 +62,7 @@ import com.example.apple_yrecipes.ViewModel.Repository
 import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.db.Recipe
 import com.example.apple_yrecipes.ui.theme.AppleyRecipesTheme
+import com.example.apple_yrecipes.ui.theme.Itim
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -75,6 +86,7 @@ class AddActivity : ComponentActivity() {
             }
         }
     )
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -123,39 +135,159 @@ class AddActivity : ComponentActivity() {
                         Button(onClick = {
                             val navigate = Intent(this@AddActivity, MainActivity::class.java)
                             startActivity(navigate)
-                        }) {
-                            Text(text = "Go back")
+                        },
+                            colors = ButtonDefaults.buttonColors(
+                                colorResource(id = R.color.red)),
+                            shape = RoundedCornerShape(8.dp),
+                            ) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(
+                                        start = 5.dp,
+                                        end = 5.dp),
+                                fontSize = 20.sp,
+                                fontFamily = Itim,
+                                text = "Go back"
+                            )
                         }
-
 
                         AddRecipeImage(ImagePath)
 
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(
+                            modifier = Modifier.height(10.dp)
+                        )
 
-                        TextField(value = RecipeName,
-                            onValueChange = {RecipeName = it},
-                            placeholder = { Text(text = "Recipe name") })
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                        ) {
+                            Box(
+                                Modifier
+                                    .width(280.dp)
+                                    .height(3.dp)
+                                    .background(
+                                        color = colorResource(id = R.color.red),
+                                        shape = RoundedCornerShape(5.dp)
+                                    )
+                            )
+
+                            TextField(
+                                modifier = Modifier
+                                    .padding(
+                                        top = 3.dp
+                                    )
+                                    .background(color = colorResource(id = R.color.beige)),
+                                value = RecipeName,
+                                onValueChange = {RecipeName = it},
+                                placeholder = {
+                                    Text(
+                                        fontFamily = Itim,
+                                        fontSize = 20.sp,
+                                        color = colorResource(id = R.color.darkRed),
+                                        text = "Recipe name"
+                                    )
+                                              },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    containerColor = colorResource(id = R.color.beige)
+                                )
+                            )
+                        }
 
 
-                        TextField(value = Ingredient,
-                            onValueChange = {Ingredient = it},
-                            placeholder = { Text(text = "Ingredient") })
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                        ) {
+                            Box(
+                                Modifier
+                                    .width(280.dp)
+                                    .height(3.dp)
+                                    .background(
+                                        color = colorResource(id = R.color.red),
+                                        shape = RoundedCornerShape(5.dp)
+                                    )
+                            )
+                            TextField(
+                                modifier = Modifier
+                                    .padding(
+                                        top = 3.dp
+                                    )
+                                    .background(color = colorResource(id = R.color.beige)),
+                                value = Ingredient,
+                                onValueChange = {Ingredient = it},
+                                placeholder = {
+                                    Text(
+                                        fontFamily = Itim,
+                                        fontSize = 20.sp,
+                                        color = colorResource(id = R.color.darkRed),
+                                        text = "Ingredient"
+                                    )
+                                              },
+                                colors = TextFieldDefaults.textFieldColors(
+                                containerColor = colorResource(id = R.color.beige)
+                                )
+                            )
+                        }
 
 
-                        TextField(value = Description,
-                            onValueChange = {Description = it},
-                            placeholder = { Text(text = "Description") })
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                        ) {
+                            Box(
+                                Modifier
+                                    .width(280.dp)
+                                    .height(3.dp)
+                                    .background(
+                                        color = colorResource(id = R.color.red),
+                                        shape = RoundedCornerShape(5.dp)
+                                    )
+                            )
+
+                            TextField(
+                                modifier = Modifier
+                                    .padding(
+                                        top = 3.dp
+                                    )
+                                    .background(color = colorResource(id = R.color.beige)),
+                                value = Description,
+                                onValueChange = {Description = it},
+                                placeholder = {
+                                    Text(
+                                        fontFamily = Itim,
+                                        fontSize = 20.sp,
+                                        color = colorResource(id = R.color.darkRed),
+                                        text = "Description"
+                                    )
+                                              },
+                                colors = TextFieldDefaults.textFieldColors(
+                                containerColor = colorResource(id = R.color.beige)
+                                )
+                            )
+                        }
 
 
 
-
-                        Button(onClick = {
+                        Button(
+                            onClick = {
                             Log.i("image", ImagePath.value)
                             viewModel.upsertRecipe(recipe)
                             val navigate = Intent(this@AddActivity, MainActivity::class.java)
                             startActivity(navigate)
-                        }) {
-                            Text(text = "Save")
+                        },
+                            colors = ButtonDefaults.buttonColors(
+                                colorResource(id = R.color.red)),
+                            shape = RoundedCornerShape(8.dp),
+                            ) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(
+                                        start = 5.dp,
+                                        end = 5.dp),
+                                fontSize = 20.sp,
+                                fontFamily = Itim,
+                                text = "Save"
+                            )
                         }
 
 
@@ -221,7 +353,7 @@ fun AddRecipeImage(imagePath:MutableState<String>){
                 .size(250.dp)
                 .border(
                     width = 1.dp,
-                    color = Color.Blue,
+                    color = colorResource(id = R.color.darkRed),
                     shape = RectangleShape
                 )
                 .clickable { launcher.launch("image/*") }

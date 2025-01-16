@@ -21,7 +21,6 @@ class CheckRecipeViewModel(private val repository: Repository, val RecipeId:Int)
             itemUiState = repository.getRecipe(RecipeId = RecipeId).first()
         }
     }
-    //TODO change argument
     fun deleteRecipe(item: Recipe){
         viewModelScope.launch {
             repository.deleteRecipe(item)

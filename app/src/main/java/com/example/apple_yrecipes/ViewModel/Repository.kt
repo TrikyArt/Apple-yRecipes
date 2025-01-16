@@ -14,6 +14,10 @@ class Repository(private val db : AppDatabase) {
         db.recipeDao().deleteRecipe(recipe)
     }
 
+    suspend fun updateRecipe(recipe: Recipe){
+        db.recipeDao().updateRecipe(recipe)
+    }
+
     fun getAllRecipes() = db.recipeDao().getAllRecipes()
 
     fun getRecipe(RecipeId:Int) = db.recipeDao().getRecipe(RecipeId = RecipeId)

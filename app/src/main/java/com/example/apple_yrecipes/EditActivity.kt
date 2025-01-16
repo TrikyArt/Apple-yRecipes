@@ -84,9 +84,6 @@ class EditActivity : ComponentActivity() {
                     var Ingredient by remember {
                         mutableStateOf("")
                     }
-                    var Description by remember {
-                        mutableStateOf("")
-                    }
 
                     Image(
                         painter = painterResource(id = R.drawable.bg),
@@ -111,8 +108,8 @@ class EditActivity : ComponentActivity() {
                             onValueChange = {Ingredient = it},
                             placeholder = { Text(text = "Ingredient") })
 
-                        TextField(value = Description,
-                            onValueChange = {Description = it},
+                        TextField(value = viewModel.currentRecipe?.Description ?: "placeholder",
+                            onValueChange = { viewModel.changeDescription(it)},
                             placeholder = { Text(text = "Description") })
 
                         Button(onClick = {

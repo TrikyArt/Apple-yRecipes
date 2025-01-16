@@ -118,6 +118,8 @@ class AddActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
 
+                        AddRecipeImage(ImagePath)
+
                         Button(onClick = {
                             val navigate = Intent(this@AddActivity, MainActivity::class.java)
                             startActivity(navigate)
@@ -153,7 +155,7 @@ class AddActivity : ComponentActivity() {
                         }) {
                             Text(text = "Save")
                         }
-                        AddRecipeImage(ImagePath)
+
 
                     }
                 }

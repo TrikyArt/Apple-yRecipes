@@ -1,8 +1,10 @@
 package com.example.apple_yrecipes
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -23,6 +25,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -45,6 +49,11 @@ import com.example.apple_yrecipes.ViewModel.Repository
 import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.db.Recipe
 import com.example.apple_yrecipes.ui.theme.AppleyRecipesTheme
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
+import kotlin.reflect.typeOf
 
 class AddActivity : ComponentActivity() {
     private val db by lazy {
@@ -71,6 +80,10 @@ class AddActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background){
 
+                    var ImagePath = rememberSaveable {
+                        mutableStateOf("")
+                    }
+
                     var RecipeName by remember {
                         mutableStateOf("")
                     }
@@ -85,7 +98,7 @@ class AddActivity : ComponentActivity() {
                         Ingredient,
                         Description,
                         //TODO: This needs to come frome an iumage picker
-                        ImagePath = ""
+                        ImagePath = ImagePath.value
                     )
                     Image(
                         painter = painterResource(id = R.drawable.bg),
@@ -115,13 +128,15 @@ class AddActivity : ComponentActivity() {
                             placeholder = { Text(text = "Description") })
 
                         Button(onClick = {
+                            Log.i("image", ImagePath.value)
                             viewModel.upsertRecipe(recipe)
                             val navigate = Intent(this@AddActivity, MainActivity::class.java)
                             startActivity(navigate)
                         }) {
                             Text(text = "Save")
                         }
-                        AddRecipeImage()
+                        AddRecipeImage(ImagePath)
+
                     }
                 }
             }
@@ -130,25 +145,49 @@ class AddActivity : ComponentActivity() {
 }
 
 @Composable
-fun AddRecipeImage(){
-
-    val imageUri = rememberSaveable {
-        mutableStateOf("")
+fun AddRecipeImage(imagePath:MutableState<String>){
+    val context = LocalContext.current
+    val appImagesDir = File(context.filesDir, "appImages")
+    if (!appImagesDir.exists()) {
+        appImagesDir.mkdir()
     }
-    val painter = rememberAsyncImagePainter(
-        imageUri.value.ifEmpty { R.drawable.ic_launcher_foreground }
-    )
+
+    //var imagePath by remember { mutableStateOf<String?>(null) }
+
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        uri?.let { imageUri.value = it.toString() }
+        //Log.i("image", uri.toString())
+        val inputStream: InputStream? = uri?.let { context.contentResolver.openInputStream(it) }
+        if (inputStream===null){
+            Log.e("image", "no input stream")
+        }
+        val imageFileName = "image_${System.currentTimeMillis()}.jpg"
+        val imageFile = File(appImagesDir, imageFileName)
+
+        try {
+            val outputStream: OutputStream = FileOutputStream(imageFile)
+            inputStream?.copyTo(outputStream)
+            inputStream?.close()
+            outputStream.close()
+            imagePath.value = imageFile.absolutePath
+            Log.i("image", imageFile.absolutePath)
+        } catch (e: Exception){
+            e.printStackTrace()
+            Log.e("image", e.toString())
+        }
+    }
+    val painter = if (imagePath.value.isEmpty()){
+        painterResource(R.drawable.ic_launcher_foreground)
+    } else {
+        rememberAsyncImagePainter(imagePath.value)
     }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-        Image(painter = painter,
+        Image(painter =  painter,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier

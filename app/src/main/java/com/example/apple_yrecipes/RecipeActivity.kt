@@ -131,7 +131,17 @@ class RecipeActivity : ComponentActivity() {
                         }
                         if (oneRecipe != null) {
 
-                            RecipeImage()
+                            val painter = if (oneRecipe!!.ImagePath.isEmpty()){
+                                painterResource(R.drawable.ic_launcher_foreground)
+                            } else {
+                                rememberAsyncImagePainter(oneRecipe!!.ImagePath)
+                            }
+                            Log.i("image", oneRecipe.toString())
+                            Image(
+                                painter = painter,
+                                contentDescription = "Image Path"
+
+                            )
 
                             Box(
                                 modifier = Modifier

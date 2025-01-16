@@ -13,8 +13,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -93,7 +96,14 @@ class AddActivity : ComponentActivity() {
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier.fillMaxSize()
                     )
-                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Column(
+                        Modifier
+                            .padding(
+                                top = 50.dp,
+                                start = 20.dp
+                            ),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
 
                         Button(onClick = {
                             val navigate = Intent(this@AddActivity, MainActivity::class.java)
@@ -102,17 +112,25 @@ class AddActivity : ComponentActivity() {
                             Text(text = "Go back")
                         }
 
-                        TextField(value = RecipeName,
-                            onValueChange = {RecipeName = it},
-                            placeholder = { Text(text = "Recipe name") })
+                        AddRecipeImage()
 
-                        TextField(value = Ingredient,
-                            onValueChange = {Ingredient = it},
-                            placeholder = { Text(text = "Ingredient") })
 
-                        TextField(value = Description,
-                            onValueChange = {Description = it},
-                            placeholder = { Text(text = "Description") })
+                            TextField(value = RecipeName,
+                                onValueChange = {RecipeName = it},
+                                placeholder = { Text(text = "Recipe name") })
+
+
+                            TextField(value = Ingredient,
+                                onValueChange = {Ingredient = it},
+                                placeholder = { Text(text = "Ingredient") })
+
+
+                            TextField(value = Description,
+                                onValueChange = {Description = it},
+                                placeholder = { Text(text = "Description") })
+
+
+
 
                         Button(onClick = {
                             viewModel.upsertRecipe(recipe)
@@ -121,7 +139,7 @@ class AddActivity : ComponentActivity() {
                         }) {
                             Text(text = "Save")
                         }
-                        AddRecipeImage()
+
                     }
                 }
             }

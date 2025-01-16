@@ -13,12 +13,12 @@ import kotlinx.coroutines.launch
 class CheckRecipeViewModel(private val repository: Repository, val RecipeId:Int):ViewModel() {
     fun getRecipe() = repository.getRecipe(RecipeId).asLiveData(viewModelScope.coroutineContext)
 
-    var itemUiState by mutableStateOf<Recipe?>(null)
+    var newRecipe by mutableStateOf<Recipe?>(null)
         private set
 
     init {
         viewModelScope.launch {
-            itemUiState = repository.getRecipe(RecipeId = RecipeId).first()
+            newRecipe = repository.getRecipe(RecipeId = RecipeId).first()
         }
     }
     fun deleteRecipe(item: Recipe){

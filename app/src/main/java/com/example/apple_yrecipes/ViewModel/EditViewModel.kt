@@ -26,6 +26,12 @@ class EditViewModel(private val repository: Repository,val RecipeId:Int):ViewMod
     fun changeDescription(newDescription: String) {
         currentRecipe = currentRecipe?.copy(Description = newDescription)
     }
+    fun changeIngredient(newIngredients: String) {
+        currentRecipe = currentRecipe?.copy(Ingredient = newIngredients)
+    }
+    fun changeImage(newImage: String) {
+        currentRecipe = currentRecipe?.copy(ImagePath = newImage)
+    }
 
     fun saveChanges(){
         viewModelScope.launch{

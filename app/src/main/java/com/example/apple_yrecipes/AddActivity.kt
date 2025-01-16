@@ -112,7 +112,6 @@ class AddActivity : ComponentActivity() {
                         RecipeName,
                         Ingredient,
                         Description,
-                        //TODO: This needs to come frome an iumage picker
                         ImagePath = ImagePath.value
                     )
                     Image(
@@ -276,7 +275,6 @@ class AddActivity : ComponentActivity() {
 
                         Button(
                             onClick = {
-                            Log.i("image", ImagePath.value)
                             viewModel.upsertRecipe(recipe)
                             val navigate = Intent(this@AddActivity, MainActivity::class.java)
                             startActivity(navigate)
@@ -312,12 +310,9 @@ fun AddRecipeImage(imagePath:MutableState<String>){
         appImagesDir.mkdir()
     }
 
-    //var imagePath by remember { mutableStateOf<String?>(null) }
-
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        //Log.i("image", uri.toString())
         val inputStream: InputStream? = uri?.let { context.contentResolver.openInputStream(it) }
         if (inputStream===null){
             Log.e("image", "no input stream")

@@ -15,14 +15,23 @@ class AddViewModel(private val repository: Repository): ViewModel() {
     var newRecipeName by mutableStateOf("Recipe name")
         private set
 
+    var newIngredient by mutableStateOf("Ingredients")
+        private set
+
+    var newDescription by mutableStateOf("Description")
+        private set
+
     fun setRecName(addName: String){
         newRecipeName = addName
     }
     fun setIngredient(addIng: String){
-        newRecipeName = addIng
+        newIngredient = addIng
     }
     fun setDescription(addDesc: String){
-        newRecipeName = addDesc
+        newDescription = addDesc
+    }
+    fun setImage(addImg: String){
+        newRecipeName = addImg
     }
 
 

@@ -35,11 +35,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
@@ -95,7 +90,7 @@ class AddActivity : ComponentActivity() {
                     }
                     val recipe = Recipe(
                         viewModel.newRecipeName,
-                        viewModel.newRecipeName,
+                        viewModel.newIngredient,
                         viewModel.newRecipeName,
                         ImagePath = ImagePath.value
                     )
@@ -201,7 +196,7 @@ class AddActivity : ComponentActivity() {
                                         start = 2.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
-                                value = viewModel.newRecipeName,
+                                value = viewModel.newIngredient,
                                 onValueChange = {viewModel.setIngredient(it)},
                                 placeholder = {
                                     Text(
@@ -240,7 +235,7 @@ class AddActivity : ComponentActivity() {
                                         start = 2.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
-                                value = viewModel.newRecipeName,
+                                value = viewModel.newDescription,
                                 onValueChange = {viewModel.setDescription(it)},
                                 placeholder = {
                                     Text(
@@ -278,7 +273,6 @@ class AddActivity : ComponentActivity() {
                                 text = "Save"
                             )
                         }
-
 
                     }
                 }

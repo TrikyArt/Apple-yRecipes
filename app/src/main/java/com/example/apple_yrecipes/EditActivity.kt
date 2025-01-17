@@ -77,17 +77,25 @@ class EditActivity : ComponentActivity() {
                             Text(text = "Go back")
                         }
 
-                        TextField(value = viewModel.currentRecipe?.RecipeName ?: "placeholder",
+                        TextField(value = viewModel.currentRecipe?.RecipeName ?: "",
                             onValueChange = { viewModel.renameRecipe(it) },
                             placeholder = { Text(text = "Recipe name") })
 
-                        TextField(value = viewModel.currentRecipe?.Ingredient ?: "placeholder",
+                        TextField(value = viewModel.currentRecipe?.Ingredient ?: "",
                             onValueChange = { viewModel.changeIngredient(it) },
                             placeholder = { Text(text = "Ingredient") })
 
-                        TextField(value = viewModel.currentRecipe?.Description ?: "placeholder",
+                        TextField(value = viewModel.currentRecipe?.Description ?: "",
                             onValueChange = { viewModel.changeDescription(it) },
                             placeholder = { Text(text = "Description") })
+
+
+                        if (viewModel.currentRecipe != null) {
+                            EditRecipeImage(
+                                viewModel.currentRecipe!!.ImagePath,
+                                { viewModel.changeImage(it) }
+                            )
+                        }
 
                         Button(onClick = {
                             viewModel.saveChanges()
@@ -96,12 +104,7 @@ class EditActivity : ComponentActivity() {
                         }) {
                             Text(text = "Save")
                         }
-                        if (viewModel.currentRecipe != null) {
-                            EditRecipeImage(
-                                viewModel.currentRecipe!!.ImagePath,
-                                { viewModel.changeImage(it) }
-                            )
-                        }
+
                     }
                 }
             }

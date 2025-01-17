@@ -82,7 +82,7 @@ class RecipeActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     lateinit var recipeItem: Recipe
-                    viewModel.getRecipe().observe(this, Observer{recipe->
+                    viewModel.getRecipe().observe(this, Observer { recipe ->
                         recipeItem = recipe
                     })
 
@@ -114,9 +114,9 @@ class RecipeActivity : ComponentActivity() {
                             ),
                             shape = RoundedCornerShape(8.dp),
                             onClick = {
-                            val navigate = Intent(this@RecipeActivity, MainActivity::class.java)
-                            startActivity(navigate)
-                        }) {
+                                val navigate = Intent(this@RecipeActivity, MainActivity::class.java)
+                                startActivity(navigate)
+                            }) {
                             Text(
                                 fontFamily = Itim,
                                 fontSize = 20.sp,
@@ -125,7 +125,7 @@ class RecipeActivity : ComponentActivity() {
                         }
                         if (oneRecipe != null) {
 
-                            val painter = if (oneRecipe!!.ImagePath.isEmpty()){
+                            val painter = if (oneRecipe!!.ImagePath.isEmpty()) {
                                 painterResource(R.drawable.ic_launcher_foreground)
                             } else {
                                 rememberAsyncImagePainter(oneRecipe!!.ImagePath)
@@ -201,7 +201,7 @@ class RecipeActivity : ComponentActivity() {
                                                     color = colorResource(id = R.color.red),
                                                     shape = RoundedCornerShape(5.dp)
                                                 )
-                                        ) {  }
+                                        ) { }
 
                                         Text(
                                             modifier = Modifier
@@ -220,16 +220,16 @@ class RecipeActivity : ComponentActivity() {
                                                     color = colorResource(id = R.color.red),
                                                     shape = RoundedCornerShape(5.dp)
                                                 )
-                                        ) {  }
+                                        ) { }
 
                                         Spacer(modifier = Modifier.height(6.dp))
 
                                         Text(
                                             modifier = Modifier
-                                            .padding(
-                                                top = 10.dp,
-                                                start = 8.dp
-                                            ),
+                                                .padding(
+                                                    top = 10.dp,
+                                                    start = 8.dp
+                                                ),
                                             text = "Recipe Description: ",
                                             fontFamily = Itim,
                                             color = colorResource(id = R.color.red),
@@ -257,7 +257,7 @@ class RecipeActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(IntrinsicSize.Min)
-                        ){
+                        ) {
                             Button(
                                 modifier = Modifier.padding(start = 80.dp),
                                 colors = ButtonDefaults.buttonColors(
@@ -265,7 +265,9 @@ class RecipeActivity : ComponentActivity() {
                                 ),
                                 shape = RoundedCornerShape(8.dp),
                                 onClick = {
-                                    val navigation = Intent(this@RecipeActivity,EditActivity::class.java)
+                                    val navigation =
+                                        Intent(this@RecipeActivity, EditActivity::class.java)
+                                    navigation.putExtra("RecipeId", viewModel.RecipeId)
                                     startActivity(navigation)
                                 }) {
                                 Text(
@@ -280,11 +282,12 @@ class RecipeActivity : ComponentActivity() {
                             Button(
                                 modifier = Modifier.padding(start = 20.dp),
                                 shape = RoundedCornerShape(8.dp),
-                               colors = ButtonDefaults.buttonColors(
-                                   colorResource(id = R.color.red)
-                               ),
+                                colors = ButtonDefaults.buttonColors(
+                                    colorResource(id = R.color.red)
+                                ),
                                 onClick = {
-                                    val navigate = Intent(this@RecipeActivity,MainActivity::class.java)
+                                    val navigate =
+                                        Intent(this@RecipeActivity, MainActivity::class.java)
                                     viewModel.deleteRecipe(recipeItem)
                                     startActivity(navigate)
                                 }

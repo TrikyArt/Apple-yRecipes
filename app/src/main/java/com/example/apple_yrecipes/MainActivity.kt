@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
-import com.example.apple_yrecipes.ViewModel.RecipeViewModel
+import com.example.apple_yrecipes.ViewModel.AddViewModel
 import com.example.apple_yrecipes.ViewModel.Repository
 import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.db.Recipe
@@ -57,11 +57,11 @@ class MainActivity : ComponentActivity() {
             name = "recipe.db"
         ).fallbackToDestructiveMigration().build()
     }
-    private val viewModel by viewModels<RecipeViewModel> (
+    private val viewModel by viewModels<AddViewModel> (
         factoryProducer = {
             object : ViewModelProvider.Factory{
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return RecipeViewModel(Repository(db)) as T
+                    return AddViewModel(Repository(db)) as T
                 }
             }
         }

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.apple_yrecipes.db.Recipe
 import kotlinx.coroutines.launch
 
-class RecipeViewModel(private val repository: Repository): ViewModel() {
+class AddViewModel(private val repository: Repository): ViewModel() {
     fun getRecipes() = repository.getAllRecipes().asLiveData(viewModelScope.coroutineContext)
 
     fun upsertRecipe(recipe: Recipe){

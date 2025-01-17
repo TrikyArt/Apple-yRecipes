@@ -77,14 +77,6 @@ class EditActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background){
 
-                    var ImagePath = rememberSaveable {
-                        mutableStateOf("")
-                    }
-
-                    var Ingredient by remember {
-                        mutableStateOf("")
-                    }
-
                     Image(
                         painter = painterResource(id = R.drawable.bg),
                         contentDescription = null,
@@ -104,8 +96,8 @@ class EditActivity : ComponentActivity() {
                             onValueChange = { viewModel.renameRecipe(it)},
                             placeholder = { Text(text = "Recipe name") })
 
-                        TextField(value = Ingredient,
-                            onValueChange = {Ingredient = it},
+                        TextField(value = viewModel.currentRecipe?.Ingredient ?: "placeholder",
+                            onValueChange = { viewModel.changeIngredient(it)},
                             placeholder = { Text(text = "Ingredient") })
 
                         TextField(value = viewModel.currentRecipe?.Description ?: "placeholder",
@@ -119,8 +111,7 @@ class EditActivity : ComponentActivity() {
                         }) {
                             Text(text = "Save")
                         }
-                        EditRecipeImage(ImagePath)
-
+                        EditRecipeImage(value = viewModel.currentRecipe?.ImagePath ?: "placeholder")
                     }
                 }
             }
@@ -136,12 +127,9 @@ fun EditRecipeImage(imagePath:MutableState<String>){
         appImagesDir.mkdir()
     }
 
-    //var imagePath by remember { mutableStateOf<String?>(null) }
-
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        //Log.i("image", uri.toString())
         val inputStream: InputStream? = uri?.let { context.contentResolver.openInputStream(it) }
         if (inputStream===null){
             Log.e("image", "no input stream")

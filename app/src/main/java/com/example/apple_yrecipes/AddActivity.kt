@@ -85,14 +85,11 @@ class AddActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background){
 
-                    var ImagePath = rememberSaveable {
-                        mutableStateOf("")
-                    }
                     val recipe = Recipe(
                         viewModel.newRecipeName,
                         viewModel.newIngredient,
                         viewModel.newRecipeName,
-                        ImagePath = ImagePath.value
+                        ImagePath = "ImagePath.value"
                     )
                     Image(
                         painter = painterResource(id = R.drawable.bg),
@@ -129,8 +126,9 @@ class AddActivity : ComponentActivity() {
                                 text = "Go back"
                             )
                         }
-
-                        AddRecipeImage(ImagePath)
+                           EditRecipeImage(viewModel.newImagePath, {
+                               viewModel.setImage(it)
+                           })
 
                         Spacer(
                             modifier = Modifier.height(10.dp)

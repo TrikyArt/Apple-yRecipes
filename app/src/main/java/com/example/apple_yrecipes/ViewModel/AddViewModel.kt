@@ -21,6 +21,9 @@ class AddViewModel(private val repository: Repository): ViewModel() {
     var newDescription by mutableStateOf("Description")
         private set
 
+    var newImagePath by mutableStateOf("")
+        private set
+
     fun setRecName(addName: String){
         newRecipeName = addName
     }
@@ -31,7 +34,7 @@ class AddViewModel(private val repository: Repository): ViewModel() {
         newDescription = addDesc
     }
     fun setImage(addImg: String){
-        newRecipeName = addImg
+        newImagePath = addImg
     }
 
 

@@ -264,7 +264,10 @@ class RecipeActivity : ComponentActivity() {
                                     colorResource(id = R.color.red)
                                 ),
                                 shape = RoundedCornerShape(8.dp),
-                                onClick = {}) {
+                                onClick = {
+                                    val navigation = Intent(this@RecipeActivity,EditActivity::class.java)
+                                    startActivity(navigation)
+                                }) {
                                 Text(
                                     modifier = Modifier
                                         .padding(start = 10.dp, end = 10.dp),

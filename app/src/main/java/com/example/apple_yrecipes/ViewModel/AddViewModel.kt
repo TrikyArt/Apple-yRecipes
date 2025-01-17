@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.apple_yrecipes.db.Recipe
 import kotlinx.coroutines.launch
 
-class AddViewModel(private val repository: Repository): ViewModel() {
+class AddViewModel(private val repository: Repository) : ViewModel() {
     fun getRecipes() = repository.getAllRecipes().asLiveData(viewModelScope.coroutineContext)
 
     var newRecipeName by mutableStateOf("Recipe name")
@@ -24,21 +24,30 @@ class AddViewModel(private val repository: Repository): ViewModel() {
     var newImagePath by mutableStateOf("")
         private set
 
-    fun setRecName(addName: String){
+    fun setRecName(addName: String) {
         newRecipeName = addName
     }
-    fun setIngredient(addIng: String){
+
+    fun setIngredient(addIng: String) {
         newIngredient = addIng
     }
-    fun setDescription(addDesc: String){
+
+    fun setDescription(addDesc: String) {
         newDescription = addDesc
     }
-    fun setImage(addImg: String){
+
+    fun setImage(addImg: String) {
         newImagePath = addImg
     }
 
 
-    fun upsertRecipe(recipe: Recipe){
+    fun upsertRecipe() {
+        var recipe = Recipe(
+            RecipeName = newRecipeName,
+            Ingredient = newIngredient,
+            Description = newDescription,
+            ImagePath = newImagePath
+        )
         viewModelScope.launch {
             repository.upsertRecipe(recipe)
         }

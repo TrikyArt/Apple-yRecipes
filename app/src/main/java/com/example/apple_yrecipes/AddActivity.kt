@@ -85,12 +85,6 @@ class AddActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background){
 
-                    val recipe = Recipe(
-                        viewModel.newRecipeName,
-                        viewModel.newIngredient,
-                        viewModel.newRecipeName,
-                        ImagePath = "ImagePath.value"
-                    )
                     Image(
                         painter = painterResource(id = R.drawable.bg),
                         contentDescription = null,
@@ -253,7 +247,7 @@ class AddActivity : ComponentActivity() {
 
                         Button(
                             onClick = {
-                            viewModel.upsertRecipe(recipe)
+                            viewModel.upsertRecipe()
                             val navigate = Intent(this@AddActivity, MainActivity::class.java)
                             startActivity(navigate)
                         },

@@ -1,6 +1,7 @@
 package com.example.apple_yrecipes
 
 import android.content.Intent
+import android.content.pm.ChangedPackages
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -42,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import coil3.Image
 import coil3.compose.rememberAsyncImagePainter
 import com.example.apple_yrecipes.ViewModel.EditViewModel
 import com.example.apple_yrecipes.ViewModel.Repository
@@ -60,22 +62,28 @@ class EditActivity : ComponentActivity() {
             name = "recipe.db"
         ).build()
     }
-    private val viewModel by viewModels<EditViewModel> (
+    private val viewModel by viewModels<EditViewModel>(
         factoryProducer = {
-            object : ViewModelProvider.Factory{
+            object : ViewModelProvider.Factory {
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return EditViewModel(Repository(db),this@EditActivity.intent.getIntExtra("RecipeId",0)) as T
+                    return EditViewModel(
+                        Repository(db),
+                        this@EditActivity.intent.getIntExtra("RecipeId", 0)
+                    ) as T
                 }
             }
         }
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AppleyRecipesTheme {
-                Surface(modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background){
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
 
                     Image(
                         painter = painterResource(id = R.drawable.bg),
@@ -83,7 +91,10 @@ class EditActivity : ComponentActivity() {
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier.fillMaxSize()
                     )
-                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Column(
+                        Modifier.padding(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
 
                         Button(onClick = {
                             val navigate = Intent(this@EditActivity, MainActivity::class.java)
@@ -92,16 +103,16 @@ class EditActivity : ComponentActivity() {
                             Text(text = "Go back")
                         }
 
-                        TextField(value = viewModel.currentRecipe?.RecipeName ?: "placerholder",
-                            onValueChange = { viewModel.renameRecipe(it)},
+                        TextField(value = viewModel.currentRecipe?.RecipeName ?: "placeholder",
+                            onValueChange = { viewModel.renameRecipe(it) },
                             placeholder = { Text(text = "Recipe name") })
 
                         TextField(value = viewModel.currentRecipe?.Ingredient ?: "placeholder",
-                            onValueChange = { viewModel.changeIngredient(it)},
+                            onValueChange = { viewModel.changeIngredient(it) },
                             placeholder = { Text(text = "Ingredient") })
 
                         TextField(value = viewModel.currentRecipe?.Description ?: "placeholder",
-                            onValueChange = { viewModel.changeDescription(it)},
+                            onValueChange = { viewModel.changeDescription(it) },
                             placeholder = { Text(text = "Description") })
 
                         Button(onClick = {
@@ -111,7 +122,12 @@ class EditActivity : ComponentActivity() {
                         }) {
                             Text(text = "Save")
                         }
-                        EditRecipeImage(value = viewModel.currentRecipe?.ImagePath ?: "placeholder")
+                        if (viewModel.currentRecipe != null) {
+                            EditRecipeImage(
+                                viewModel.currentRecipe!!.ImagePath,
+                                { viewModel.changeImage(it) }
+                            )
+                        }
                     }
                 }
             }
@@ -120,7 +136,8 @@ class EditActivity : ComponentActivity() {
 }
 
 @Composable
-fun EditRecipeImage(imagePath:MutableState<String>){
+fun EditRecipeImage(imagePath: String, onImageChanged: (String) -> Unit)
+{
     val context = LocalContext.current
     val appImagesDir = File(context.filesDir, "appImages")
     if (!appImagesDir.exists()) {
@@ -131,7 +148,7 @@ fun EditRecipeImage(imagePath:MutableState<String>){
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         val inputStream: InputStream? = uri?.let { context.contentResolver.openInputStream(it) }
-        if (inputStream===null){
+        if (inputStream === null) {
             Log.e("image", "no input stream")
         }
         val imageFileName = "image_${System.currentTimeMillis()}.jpg"
@@ -142,24 +159,22 @@ fun EditRecipeImage(imagePath:MutableState<String>){
             inputStream?.copyTo(outputStream)
             inputStream?.close()
             outputStream.close()
-            imagePath.value = imageFile.absolutePath
-            Log.i("image", imageFile.absolutePath)
-        } catch (e: Exception){
+            onImageChanged(imageFile.absolutePath)
+        } catch (e: Exception) {
             e.printStackTrace()
-            Log.e("image", e.toString())
         }
     }
-    val painter = if (imagePath.value.isEmpty()){
+    val painter = if (imagePath.isEmpty()) {
         painterResource(R.drawable.ic_launcher_foreground)
     } else {
-        rememberAsyncImagePainter(imagePath.value)
+        rememberAsyncImagePainter(imagePath)
     }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-        Image(painter =  painter,
+        Image(painter = painter,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier

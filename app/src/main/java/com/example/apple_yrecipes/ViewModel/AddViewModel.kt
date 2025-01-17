@@ -12,13 +12,13 @@ import kotlinx.coroutines.launch
 class AddViewModel(private val repository: Repository) : ViewModel() {
     fun getRecipes() = repository.getAllRecipes().asLiveData(viewModelScope.coroutineContext)
 
-    var newRecipeName by mutableStateOf("Recipe name")
+    var newRecipeName by mutableStateOf("")
         private set
 
-    var newIngredient by mutableStateOf("Ingredients")
+    var newIngredient by mutableStateOf("")
         private set
 
-    var newDescription by mutableStateOf("Description")
+    var newDescription by mutableStateOf("")
         private set
 
     var newImagePath by mutableStateOf("")

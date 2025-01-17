@@ -21,6 +21,9 @@ class AddViewModel(private val repository: Repository): ViewModel() {
     fun setIngredient(addIng: String){
         newRecipeName = addIng
     }
+    fun setDescription(addDesc: String){
+        newRecipeName = addDesc
+    }
 
 
     fun upsertRecipe(recipe: Recipe){

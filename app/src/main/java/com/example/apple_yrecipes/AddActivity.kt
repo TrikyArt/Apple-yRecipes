@@ -93,13 +93,10 @@ class AddActivity : ComponentActivity() {
                     var ImagePath = rememberSaveable {
                         mutableStateOf("")
                     }
-                    var Description by remember {
-                        mutableStateOf("")
-                    }
                     val recipe = Recipe(
                         viewModel.newRecipeName,
                         viewModel.newRecipeName,
-                        Description,
+                        viewModel.newRecipeName,
                         ImagePath = ImagePath.value
                     )
                     Image(
@@ -243,8 +240,8 @@ class AddActivity : ComponentActivity() {
                                         start = 2.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
-                                value = Description,
-                                onValueChange = {Description = it},
+                                value = viewModel.newRecipeName,
+                                onValueChange = {viewModel.setDescription(it)},
                                 placeholder = {
                                     Text(
                                         fontFamily = Itim,

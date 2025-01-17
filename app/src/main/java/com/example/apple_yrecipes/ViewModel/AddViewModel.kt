@@ -18,6 +18,10 @@ class AddViewModel(private val repository: Repository): ViewModel() {
     fun setRecName(addName: String){
         newRecipeName = addName
     }
+    fun setIngredient(addIng: String){
+        newRecipeName = addIng
+    }
+
 
     fun upsertRecipe(recipe: Recipe){
         viewModelScope.launch {

@@ -9,9 +9,13 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -106,64 +110,113 @@ class EditActivity : ComponentActivity() {
                             )
                         }
 
-                        TextField(
-                            modifier = Modifier
-                                .padding(
-                                    top = 3.dp,
-                                    start = 2.dp
-                                )
-                                .background(color = colorResource(id = R.color.beige)),
-                            value = viewModel.currentRecipe?.RecipeName ?: "",
-                            onValueChange = { viewModel.renameRecipe(it) },
-                            placeholder = {
-                                Text(
-                                    fontFamily = Itim,
-                                    fontSize = 20.sp,
-                                    color = colorResource(id = R.color.darkRed),
-                                    text = "Recipe name"
-                                )
-                            },
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = colorResource(id = R.color.beige)
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(start = 28.dp)
+                        ) {
+                            Box(
+                                Modifier
+                                    .width(284.dp)
+                                    .height(3.dp)
+                                    .background(
+                                        color = colorResource(id = R.color.red),
+                                        shape = RoundedCornerShape(5.dp)
+                                    )
                             )
-                        )
 
-                        TextField(
-                            value = viewModel.currentRecipe?.Ingredient ?: "",
-                            onValueChange = { viewModel.changeIngredient(it) },
-                            modifier = Modifier
-                                .padding(
-                                    top = 3.dp,
-                                    start = 2.dp
+                            TextField(
+                                modifier = Modifier
+                                    .padding(
+                                        top = 3.dp,
+                                        start = 2.dp
+                                    )
+                                    .background(color = colorResource(id = R.color.beige)),
+                                value = viewModel.currentRecipe?.RecipeName ?: "",
+                                onValueChange = { viewModel.renameRecipe(it) },
+                                placeholder = {
+                                    Text(
+                                        fontFamily = Itim,
+                                        fontSize = 20.sp,
+                                        color = colorResource(id = R.color.darkRed),
+                                        text = "Recipe name"
+                                    )
+                                },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    containerColor = colorResource(id = R.color.beige)
                                 )
-                                .background(color = colorResource(id = R.color.beige)),
-                            placeholder = {
-                                Text(
-                                    text = "Ingredient"
-                                )
-                            },
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = colorResource(id = R.color.beige)
                             )
-                        )
+                        }
 
-                        TextField(
-                            modifier = Modifier
-                                .padding(
-                                    top = 3.dp,
-                                    start = 2.dp
-                                )
-                                .background(color = colorResource(id = R.color.beige)),
-                            value = viewModel.currentRecipe?.Description ?: "",
-                            onValueChange = { viewModel.changeDescription(it) },
-                            placeholder = {
-                                Text(
-                                    text = "Description"
-                                ) },
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = colorResource(id = R.color.beige)
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(start = 28.dp)
+                        ) {
+                            Box(
+                                Modifier
+                                    .width(284.dp)
+                                    .height(3.dp)
+                                    .background(
+                                        color = colorResource(id = R.color.red),
+                                        shape = RoundedCornerShape(5.dp)
+                                    )
                             )
-                        )
+
+                            TextField(
+                                value = viewModel.currentRecipe?.Ingredient ?: "",
+                                onValueChange = { viewModel.changeIngredient(it) },
+                                modifier = Modifier
+                                    .padding(
+                                        top = 3.dp,
+                                        start = 2.dp
+                                    )
+                                    .background(color = colorResource(id = R.color.beige)),
+                                placeholder = {
+                                    Text(
+                                        text = "Ingredient"
+                                    )
+                                },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    containerColor = colorResource(id = R.color.beige)
+                                )
+                            )
+                        }
+
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(start = 28.dp)
+                        ) {
+                            Box(
+                                Modifier
+                                    .width(284.dp)
+                                    .height(3.dp)
+                                    .background(
+                                        color = colorResource(id = R.color.red),
+                                        shape = RoundedCornerShape(5.dp)
+                                    )
+                            )
+
+                            TextField(
+                                modifier = Modifier
+                                    .padding(
+                                        top = 3.dp,
+                                        start = 2.dp
+                                    )
+                                    .background(color = colorResource(id = R.color.beige)),
+                                value = viewModel.currentRecipe?.Description ?: "",
+                                onValueChange = { viewModel.changeDescription(it) },
+                                placeholder = {
+                                    Text(
+                                        text = "Description"
+                                    )
+                                },
+                                colors = TextFieldDefaults.textFieldColors(
+                                    containerColor = colorResource(id = R.color.beige)
+                                )
+                            )
+                        }
 
 
                         Button(

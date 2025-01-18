@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,10 +15,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -54,6 +57,7 @@ class EditActivity : ComponentActivity() {
         }
     )
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -71,12 +75,15 @@ class EditActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize()
                     )
                     Column(
-                        Modifier.padding(12.dp),
+                        Modifier.padding(
+                            top = 80.dp,
+                            start = 30.dp
+                        ),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
 
                         Button(
-                            modifier = Modifier.padding(start = 20.dp),
+                            modifier = Modifier.padding(start = 10.dp),
                             colors = ButtonDefaults.buttonColors(
                                 colorResource(id = R.color.red)
                             ),
@@ -99,25 +106,82 @@ class EditActivity : ComponentActivity() {
                             )
                         }
 
-                        TextField(value = viewModel.currentRecipe?.RecipeName ?: "",
+                        TextField(
+                            modifier = Modifier
+                                .padding(
+                                    top = 3.dp,
+                                    start = 2.dp
+                                )
+                                .background(color = colorResource(id = R.color.beige)),
+                            value = viewModel.currentRecipe?.RecipeName ?: "",
                             onValueChange = { viewModel.renameRecipe(it) },
-                            placeholder = { Text(text = "Recipe name") })
+                            placeholder = {
+                                Text(
+                                    fontFamily = Itim,
+                                    fontSize = 20.sp,
+                                    color = colorResource(id = R.color.darkRed),
+                                    text = "Recipe name"
+                                )
+                            },
+                            colors = TextFieldDefaults.textFieldColors(
+                                containerColor = colorResource(id = R.color.beige)
+                            )
+                        )
 
-                        TextField(value = viewModel.currentRecipe?.Ingredient ?: "",
+                        TextField(
+                            value = viewModel.currentRecipe?.Ingredient ?: "",
                             onValueChange = { viewModel.changeIngredient(it) },
-                            placeholder = { Text(text = "Ingredient") })
+                            modifier = Modifier
+                                .padding(
+                                    top = 3.dp,
+                                    start = 2.dp
+                                )
+                                .background(color = colorResource(id = R.color.beige)),
+                            placeholder = {
+                                Text(
+                                    text = "Ingredient"
+                                )
+                            },
+                            colors = TextFieldDefaults.textFieldColors(
+                                containerColor = colorResource(id = R.color.beige)
+                            )
+                        )
 
-                        TextField(value = viewModel.currentRecipe?.Description ?: "",
+                        TextField(
+                            modifier = Modifier
+                                .padding(
+                                    top = 3.dp,
+                                    start = 2.dp
+                                )
+                                .background(color = colorResource(id = R.color.beige)),
+                            value = viewModel.currentRecipe?.Description ?: "",
                             onValueChange = { viewModel.changeDescription(it) },
-                            placeholder = { Text(text = "Description") })
+                            placeholder = {
+                                Text(
+                                    text = "Description"
+                                ) },
+                            colors = TextFieldDefaults.textFieldColors(
+                                containerColor = colorResource(id = R.color.beige)
+                            )
+                        )
 
 
-                        Button(onClick = {
+                        Button(
+                            modifier = Modifier.padding(start = 10.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                colorResource(id = R.color.red)
+                            ),
+                            shape = RoundedCornerShape(8.dp),
+                            onClick = {
                             viewModel.saveChanges()
                             val navigate = Intent(this@EditActivity, MainActivity::class.java)
                             startActivity(navigate)
                         }) {
-                            Text(text = "Save")
+                            Text(
+                                fontFamily = Itim,
+                                fontSize = 20.sp,
+                                text = "Save"
+                            )
                         }
 
                     }

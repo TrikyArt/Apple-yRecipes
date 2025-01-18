@@ -141,7 +141,7 @@ class AddActivity : ComponentActivity() {
                                         color = colorResource(id = R.color.darkRed),
                                         text = "Recipe name"
                                     )
-                                              },
+                                },
                                 colors = TextFieldDefaults.textFieldColors(
                                     containerColor = colorResource(id = R.color.beige)
                                 )

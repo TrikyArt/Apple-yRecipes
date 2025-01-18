@@ -11,15 +11,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -27,6 +31,7 @@ import com.example.apple_yrecipes.ViewModel.EditViewModel
 import com.example.apple_yrecipes.ViewModel.Repository
 import com.example.apple_yrecipes.db.AppDatabase
 import com.example.apple_yrecipes.ui.theme.AppleyRecipesTheme
+import com.example.apple_yrecipes.ui.theme.Itim
 
 class EditActivity : ComponentActivity() {
     private val db by lazy {
@@ -70,11 +75,28 @@ class EditActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
 
-                        Button(onClick = {
+                        Button(
+                            modifier = Modifier.padding(start = 20.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                colorResource(id = R.color.red)
+                            ),
+                            shape = RoundedCornerShape(8.dp),
+                            onClick = {
                             val navigate = Intent(this@EditActivity, MainActivity::class.java)
                             startActivity(navigate)
                         }) {
-                            Text(text = "Go back")
+                            Text(
+                                fontFamily = Itim,
+                                fontSize = 20.sp,
+                                text = "Go back"
+                            )
+                        }
+
+                        if (viewModel.currentRecipe != null) {
+                            EditRecipeImage(
+                                viewModel.currentRecipe!!.ImagePath,
+                                { viewModel.changeImage(it) }
+                            )
                         }
 
                         TextField(value = viewModel.currentRecipe?.RecipeName ?: "",
@@ -89,13 +111,6 @@ class EditActivity : ComponentActivity() {
                             onValueChange = { viewModel.changeDescription(it) },
                             placeholder = { Text(text = "Description") })
 
-
-                        if (viewModel.currentRecipe != null) {
-                            EditRecipeImage(
-                                viewModel.currentRecipe!!.ImagePath,
-                                { viewModel.changeImage(it) }
-                            )
-                        }
 
                         Button(onClick = {
                             viewModel.saveChanges()

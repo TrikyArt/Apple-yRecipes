@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -76,7 +77,8 @@ class EditActivity : ComponentActivity() {
                         painter = painterResource(id = R.drawable.bg),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        alpha = 0.8F
                     )
                     Column(
                         Modifier.padding(
@@ -117,7 +119,7 @@ class EditActivity : ComponentActivity() {
                         ) {
                             Box(
                                 Modifier
-                                    .width(284.dp)
+                                    .width(286.dp)
                                     .height(3.dp)
                                     .background(
                                         color = colorResource(id = R.color.red),
@@ -129,7 +131,7 @@ class EditActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .padding(
                                         top = 3.dp,
-                                        start = 2.dp
+                                        start = 3.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
                                 value = viewModel.currentRecipe?.RecipeName ?: "",
@@ -143,7 +145,11 @@ class EditActivity : ComponentActivity() {
                                     )
                                 },
                                 colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = colorResource(id = R.color.beige)
+                                    containerColor = colorResource(id = R.color.beige),
+                                    focusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent
                                 )
                             )
                         }
@@ -155,7 +161,7 @@ class EditActivity : ComponentActivity() {
                         ) {
                             Box(
                                 Modifier
-                                    .width(284.dp)
+                                    .width(286.dp)
                                     .height(3.dp)
                                     .background(
                                         color = colorResource(id = R.color.red),
@@ -169,16 +175,23 @@ class EditActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .padding(
                                         top = 3.dp,
-                                        start = 2.dp
+                                        start = 3.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
                                 placeholder = {
                                     Text(
+                                        fontFamily = Itim,
+                                        fontSize = 20.sp,
+                                        color = colorResource(id = R.color.darkRed),
                                         text = "Ingredient"
                                     )
                                 },
                                 colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = colorResource(id = R.color.beige)
+                                    containerColor = colorResource(id = R.color.beige),
+                                    focusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent
                                 )
                             )
                         }
@@ -190,7 +203,7 @@ class EditActivity : ComponentActivity() {
                         ) {
                             Box(
                                 Modifier
-                                    .width(284.dp)
+                                    .width(286.dp)
                                     .height(3.dp)
                                     .background(
                                         color = colorResource(id = R.color.red),
@@ -202,18 +215,25 @@ class EditActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .padding(
                                         top = 3.dp,
-                                        start = 2.dp
+                                        start = 3.dp
                                     )
                                     .background(color = colorResource(id = R.color.beige)),
                                 value = viewModel.currentRecipe?.Description ?: "",
                                 onValueChange = { viewModel.changeDescription(it) },
                                 placeholder = {
                                     Text(
+                                        fontFamily = Itim,
+                                        fontSize = 20.sp,
+                                        color = colorResource(id = R.color.darkRed),
                                         text = "Description"
                                     )
                                 },
                                 colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = colorResource(id = R.color.beige)
+                                    containerColor = colorResource(id = R.color.beige),
+                                    focusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent
                                 )
                             )
                         }

@@ -84,7 +84,8 @@ class MainActivity : ComponentActivity() {
                         painter = painterResource(id = R.drawable.bg),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        alpha = 0.8F
                     )
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
 

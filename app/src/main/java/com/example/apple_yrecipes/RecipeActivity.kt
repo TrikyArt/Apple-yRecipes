@@ -124,6 +124,9 @@ class RecipeActivity : ComponentActivity() {
                                 text = "go back"
                             )
                         }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
                         if (oneRecipe != null) {
 
                             val painter = if (oneRecipe!!.ImagePath.isEmpty()) {

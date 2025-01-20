@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -144,7 +145,11 @@ class AddActivity : ComponentActivity() {
                                     )
                                 },
                                 colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = colorResource(id = R.color.beige)
+                                    containerColor = colorResource(id = R.color.beige),
+                                    focusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent
                                 )
                             )
                         }
@@ -182,7 +187,11 @@ class AddActivity : ComponentActivity() {
                                     )
                                               },
                                 colors = TextFieldDefaults.textFieldColors(
-                                containerColor = colorResource(id = R.color.beige)
+                                containerColor = colorResource(id = R.color.beige),
+                                    focusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent
                                 )
                             )
                         }
@@ -221,7 +230,11 @@ class AddActivity : ComponentActivity() {
                                     )
                                               },
                                 colors = TextFieldDefaults.textFieldColors(
-                                containerColor = colorResource(id = R.color.beige)
+                                containerColor = colorResource(id = R.color.beige),
+                                    focusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedTextColor = colorResource(id = R.color.darkRed),
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent
                                 )
                             )
                         }

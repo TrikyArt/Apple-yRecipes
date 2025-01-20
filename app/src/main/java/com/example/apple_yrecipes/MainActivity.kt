@@ -102,32 +102,11 @@ class MainActivity : ComponentActivity() {
                                 contentAlignment = Alignment.Center
 
                             ) {
-                                Box(
-                                    modifier = Modifier
-                                        .shadow(
-                                            elevation = 8.dp,
-                                            shape = RoundedCornerShape(4.dp),
-                                            clip = false
-                                        )
-                                        .background(
-                                            color = colorResource(id = R.color.beige),
-                                            shape = RoundedCornerShape(4.dp)
-                                        )
-                                        .padding(
-                                            top = 20.dp,
-                                            start = 14.dp,
-                                            end = 14.dp,
-                                            bottom = 23.dp
-                                        ),
-                                ) {
-                                    Text(
-                                        text = "Apple-y Recipes",
-                                        fontWeight = FontWeight.Medium,
-                                        fontFamily = Kaushan_Script,
-                                        fontSize = 30.sp,
-                                        color = colorResource(id = R.color.red)
-                                    )
-                                }
+
+                                Image(
+                                    painter = painterResource(id = R.drawable.logo),
+                                    contentDescription = null
+                                )
                             }
 
                             Spacer(modifier = Modifier.height(45.dp))

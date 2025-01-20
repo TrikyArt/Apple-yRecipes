@@ -58,7 +58,7 @@ fun EditRecipeImage(imagePath: String, onImageChanged: (String) -> Unit)
         }
     }
     val painter = if (imagePath.isEmpty()) {
-        painterResource(R.drawable.ic_launcher_foreground)
+        painterResource(R.drawable.photo_icon)
     } else {
         rememberAsyncImagePainter(imagePath)
     }

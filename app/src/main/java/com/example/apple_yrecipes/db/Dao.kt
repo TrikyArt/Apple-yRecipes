@@ -20,6 +20,6 @@ interface Dao {
     @Query("SELECT * FROM Recipe WHERE RecipeId = :RecipeId")
     fun getRecipe(RecipeId:Int): Flow<Recipe>
 
-    @Query("SELECT * FROM Recipe")
+    @Query("SELECT * FROM Recipe Order by RecipeName ASC")
     fun getAllRecipes(): Flow<List<Recipe>>
 }

@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -93,6 +94,7 @@ class RecipeActivity : ComponentActivity() {
                         oneRecipe = it
                     }
 
+                    val showDialog = remember { mutableStateOf(false) }
                     Image(
                         painter = painterResource(id = R.drawable.bg),
                         contentDescription = null,
@@ -290,10 +292,7 @@ class RecipeActivity : ComponentActivity() {
                                     colorResource(id = R.color.red)
                                 ),
                                 onClick = {
-                                    val navigate =
-                                        Intent(this@RecipeActivity, MainActivity::class.java)
-                                    viewModel.deleteRecipe(recipeItem)
-                                    startActivity(navigate)
+                                    showDialog.value = true
                                 }
                             ) {
                                 Text(
@@ -303,6 +302,10 @@ class RecipeActivity : ComponentActivity() {
                                     text = "Delete",
                                     fontFamily = Itim,
                                 )
+                            }
+
+                            if (showDialog.value){
+                                oneRecipe?.let { AlertDelete(viewModel, it, showDialog, LocalContext.current) }
                             }
                         }
                         Spacer(modifier = Modifier.height(15.dp))

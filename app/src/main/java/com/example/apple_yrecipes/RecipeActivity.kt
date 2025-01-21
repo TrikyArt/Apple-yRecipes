@@ -20,7 +20,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -103,11 +105,14 @@ class RecipeActivity : ComponentActivity() {
                         alpha = 0.8F
                     )
 
+                    val scrollState = rememberScrollState()
+
                     Column(
                         Modifier.padding(
                             top = 80.dp,
                             start = 10.dp
-                        ),
+                        )
+                            .verticalScroll(scrollState),
                     ) {
 
                         Button(

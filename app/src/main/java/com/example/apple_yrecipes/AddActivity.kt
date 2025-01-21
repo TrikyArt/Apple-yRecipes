@@ -104,6 +104,7 @@ class AddActivity : ComponentActivity() {
                                 text = "Go back"
                             )
                         }
+
                            EditRecipeImage(viewModel.newImagePath, {
                                viewModel.setImage(it)
                            })
@@ -115,7 +116,10 @@ class AddActivity : ComponentActivity() {
                         Box(
                             Modifier
                                 .fillMaxWidth()
-                                .padding(start = 28.dp)
+                                .padding(
+                                    start = 28.dp,
+                                    end = 80.dp
+                                )
                         ) {
                             Box(
                                 Modifier
@@ -158,7 +162,10 @@ class AddActivity : ComponentActivity() {
                         Box(
                             Modifier
                                 .fillMaxWidth()
-                                .padding(start = 28.dp)
+                                .padding(
+                                    start = 28.dp,
+                                    end = 80.dp
+                                )
                         ) {
                             Box(
                                 Modifier
@@ -200,7 +207,10 @@ class AddActivity : ComponentActivity() {
                         Box(
                             Modifier
                                 .fillMaxWidth()
-                                .padding(start = 28.dp)
+                                .padding(
+                                    start = 28.dp,
+                                    end = 80.dp
+                                )
                         ) {
                             Box(
                                 Modifier

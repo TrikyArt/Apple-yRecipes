@@ -11,6 +11,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -111,12 +112,62 @@ class EditActivity : ComponentActivity() {
                             )
                         }
 
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 70.dp)
+                        ) {
+
+
+                            Box(
+                                modifier = Modifier
+                                    .padding(
+                                        top = 23.dp,
+                                        start = 55.dp
+                                    )
+
+                            ) {
+                                Text(
+                                    modifier = Modifier
+                                        .background(
+                                            color = colorResource(id = R.color.beige),
+                                            shape = RoundedCornerShape(8.dp)
+                                        )
+                                        .padding(
+                                            top = 5.dp,
+                                            start = 20.dp,
+                                            end = 20.dp
+                                        ),
+                                    text = "Edit",
+                                    fontFamily = Itim,
+                                    fontSize = 25.sp,
+                                    color = colorResource(id = R.color.darkRed)
+                                )
+                            }
+
+                            Box {
+                                Image(
+                                    painter = painterResource(id = R.drawable.rolling_pin),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .width(150.dp)
+                                        .padding(
+                                            start = 50.dp
+                                        )
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
                         if (viewModel.currentRecipe != null) {
                             EditRecipeImage(
                                 viewModel.currentRecipe!!.ImagePath,
                                 { viewModel.changeImage(it) }
                             )
                         }
+
+                        Spacer(modifier = Modifier.height(5.dp))
 
                         Box(
                             Modifier

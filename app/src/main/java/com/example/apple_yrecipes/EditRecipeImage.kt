@@ -10,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -75,5 +76,6 @@ fun EditRecipeImage(imagePath: String, onImageChanged: (String) -> Unit)
                 shape = RectangleShape
             )
             .clickable { launcher.launch("image/*") }
+            .padding(top = 30.dp)
     )
 }

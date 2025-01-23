@@ -2,6 +2,8 @@
 ### Teammembers: 
 Lidia Klosowicz, Ilvie Rath
 
+[apk](https://github.com/TrikyArt/Apple-yRecipes/blob/master/Apple-y%20Recipes.apk)
+
 ### Description: 
 Apple-y Recieps is a note app, for people interesting in cooking and trying out new recipes, so they can keep all their
              Recipes in one place, without looking over all their social medias or searching in their cookbooks for it. Apple-y Recipes

@@ -1,12 +1,14 @@
 ## Apple-y-Recipes
-Teammembers: Lidia Klosowicz, Ilvie Rath
+# Teammembers: 
+Lidia Klosowicz, Ilvie Rath
 
-Description: Apple-y Recieps is a note app, for people interesting in cooking and trying out new recipes, so they can keep all their
+# Description: 
+Apple-y Recieps is a note app, for people interesting in cooking and trying out new recipes, so they can keep all their
              Recipes in one place, without looking over all their social medias or searching in their cookbooks for it. Apple-y Recipes
              alows the users to have access to their recipes everywhere at all time. 
 
 
-Concept: 
+# Concept: 
 USecase: Place, where the user can collect different recipes from everywhere all the time.
 Target Users: people who cook, people who want to try out a lot of new recipes, hobby chefs.
 

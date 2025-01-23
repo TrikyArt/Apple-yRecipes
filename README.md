@@ -1,4 +1,4 @@
-# Apple-y-Recipes
+# Apple-y Recipes
 ### Teammembers: 
 Lidia Klosowicz, Ilvie Rath
 

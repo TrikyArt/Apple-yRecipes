@@ -17,6 +17,9 @@ Target Users: people who cook, people who want to try out a lot of new recipes, 
 
 [WireFrames & Userflow](https://www.figma.com/design/6a5v8MZWvGrOr5lBT05idp/mc-design?node-id=0-1&t=LE27QAbCI1M0prV0-1)
 
+### Database Concept: 
+We created a database based of off room. With a basic Dao, Database and Table file containing RecipeName, Ingredient, Description, RecipeId and ImagePath to save, create, delete and edit functionalities. 
+
 ### Who did what: 
 #### Lidia Klosowicz: 
 My contribution to the app was mostly working on the back-end part of the code, creating the database and all the functions and connections. 
